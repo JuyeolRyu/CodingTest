@@ -1,0 +1,47 @@
+import java.util.HashMap;
+
+public class OpenChat {
+	public String[] solution(String[] record) {
+        int logCount = record.length;
+        int ioCount = 0;
+        int num = 0;
+        HashMap<String, String> hs = new HashMap<String, String>();
+
+        for(int i=0; i<logCount;i++){
+            String[] tmp = spl(record[i]);
+
+            if(tmp[0].equals("Enter")){
+                if(hs.containsKey(tmp[1])){
+                    hs.remove(tmp[1]);
+                    hs.put(tmp[1],tmp[2]);
+                }else{
+                    hs.put(tmp[1],tmp[2]);
+                }
+                ioCount++;
+            }else if(tmp[0].equals("Change")){
+                hs.remove(tmp[1]);
+                hs.put(tmp[1],tmp[2]);
+            }else if(tmp[0].equals("Leave")){
+                ioCount++;
+            }
+
+        }
+
+        String[] answer = new String[ioCount];
+
+        for(int i=0; i<logCount;i++){
+            String[] tmp = spl(record[i]);
+
+            if(tmp[0].equals("Enter"))
+                answer[num++] = hs.get(tmp[1]) + "´ÔÀÌ µé¾î¿Ô½À´Ï´Ù.";
+            else if(tmp[0].equals("Leave"))
+                answer[num++] = hs.get(tmp[1]) + "´ÔÀÌ ³ª°¬½À´Ï´Ù.";
+
+        }
+        return answer;
+    }
+    public String[] spl(String prev){
+        String[] result = prev.split(" ");
+        return result;
+    }   
+}
