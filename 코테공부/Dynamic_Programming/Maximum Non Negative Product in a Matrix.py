@@ -32,12 +32,14 @@ class Solution:
 #sol2 dynamic programming
 class Solution:
     def maxProductPath(self, grid: List[List[int]]) -> int:
+        #음수일 경우와 양수일 경우 모두 dp 구한다.
         dp_max = [[0] * len(grid[0]) for _ in range(len(grid))]
         dp_min = [[0] * len(grid[0]) for _ in range(len(grid))]
         
         dp_max[0][0] = grid[0][0]
         dp_min[0][0] = grid[0][0]
         
+        #양쪽 사이드 먼저 dp를 구한다
         for row in range(1, len(grid)):
             dp_max[row][0] = grid[row][0] * dp_max[row-1][0]
             dp_min[row][0] = grid[row][0] * dp_max[row-1][0]
@@ -47,6 +49,7 @@ class Solution:
         
         for row in range(1,len(grid)):
             for col in range(1,len(grid[0])):
+                #위 또는 왼쪽 가장 큰값,작은값을 현재 값에 곱한것 중에 가장 큰것과 작은것을 고른다.
                 dp_max[row][col] = max(dp_max[row-1][col]*grid[row][col], dp_max[row][col-1]*grid[row][col],dp_min[row-1][col]*grid[row][col], dp_min[row][col-1]*grid[row][col])
                 dp_min[row][col] = min(dp_max[row-1][col]*grid[row][col], dp_max[row][col-1]*grid[row][col],dp_min[row-1][col]*grid[row][col], dp_min[row][col-1]*grid[row][col])
 
