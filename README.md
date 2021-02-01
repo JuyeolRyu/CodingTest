@@ -12,4 +12,6 @@ https://swexpertacademy.com/main/code/problem/problemList.do 에서
 
 못풀겠으면 주석을 달아 어떤 생각을 가지고 풀었는지 기록합니다.
 
+클래스명은 한글로 해당문제로 기록하여 JAVA파일을 생성합니다. 예시는 최광진 branch를 참고하세요.
+
 매주의 마지막에 모여서 풀이를 검토합니다.
