@@ -6,4 +6,4 @@
 | ***https://github.com/yudazzi*** | ***https://github.com/pym7857*** | ***https://github.com/arattha*** |   
 
 - ***단국대 소웨과 최고 아웃풋 3명***
-- ***치킨집 창업 예정 ('23년~)***
+- ***치킨집 창업 예정***
