@@ -23,5 +23,5 @@ issue에 풀어볼만한 문제를 알고리즘별로 올려두겠습니다.
 - ***치킨집 창업 예정***
 - ***컴퓨터와 연애중 ❤ +1000일***
 
-### Wiki
-[Wiki 바로가기](https://github.com/JuyeolRyu/CodingTest/wiki)
+# Wiki
+>[Wiki 바로가기](https://github.com/JuyeolRyu/CodingTest/wiki)
