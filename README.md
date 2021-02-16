@@ -1,4 +1,4 @@
-# CodingTest
+# CodingTest ☢
 
 해당 스터디는 SW 역량테스트를 위해 하루 1문제 공부하는 코테 스터디입니다.
 
