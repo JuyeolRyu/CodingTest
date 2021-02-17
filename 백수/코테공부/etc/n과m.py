@@ -35,3 +35,50 @@ for row in ans:
   for r in row:
     print(r,end=" ")
   print()
+#4
+n,m = map(int,input().split())
+ans = []
+
+def sol(digit,lst):
+  if digit == m+1:
+    ans.append(lst)
+    return
+  
+  for i in range(1,n+1):
+    if digit == 1:
+      sol(digit+1,lst+[i])
+    else:
+      if i >= lst[-1]:
+        sol(digit+1,lst+[i])
+  return;
+
+sol(1,[])
+for row in ans:
+  for r in row:
+    print(r,end=" ")
+  print()
+#5
+n,m = map(int,input().split())
+arr = list(map(int,input().split()))
+arr = sorted(arr)
+ans = []
+
+def sol(digit,num,lst):
+  if digit == m:
+    ans.append(lst)
+    return
+
+  for i in arr:
+    if i in lst:
+      continue
+    else:
+      sol(digit+1,i,lst+[i])
+  return;
+
+for num in arr:
+  sol(1,num,[num])
+
+for row in ans:
+  for r in row:
+    print(r,end=" ")
+  print()
