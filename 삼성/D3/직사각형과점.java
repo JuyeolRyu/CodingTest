@@ -26,10 +26,6 @@ public class 직사각형과점 {
 			int[] x=new int[N];
 			int[] y=new int[N];
 			
-			for (int i = 0; i < rec.length; i++) {
-				x[i]=sc.nextInt();
-				y[i]=sc.nextInt();
-			}
 			// 선위 (x1==a || x2==a) &&( y1<b<y2)
 			// 직사각형 내부 (x1 < a < x2) && y1<b <y2
 			for (int i = 0; i < N; i++) {
