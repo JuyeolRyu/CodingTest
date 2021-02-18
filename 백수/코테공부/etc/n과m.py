@@ -82,3 +82,26 @@ for row in ans:
   for r in row:
     print(r,end=" ")
   print()
+#6
+n,m = map(int,input().split())
+arr = list(map(int,input().split()))
+arr = sorted(arr)
+ans = []
+def sol(digit,lst):
+  if digit == m:
+    ans.append(lst)
+    return
+  
+  for num in arr:
+    if lst[-1] < num:
+      sol(digit+1,lst+[num])
+
+  return
+
+for num in arr:
+  sol(1,[num])
+
+for row in ans:
+  for col in row:
+    print(col,end=" ")
+  print()
