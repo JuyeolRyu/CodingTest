@@ -1,4 +1,4 @@
-#
+#https://www.acmicpc.net/problem/1256
 
 #sol1 dp&문자열
 from math import factorial
