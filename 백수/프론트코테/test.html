@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>영화순위</title>
+        <meta charset="uft-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id='container'>
+            <div>영화 랭킹</div>
+            <form id='nation'>
+                <label>전체<input name='nation' type='radio' value='' checked="checked"/></label>
+                <label>국내<input name='nation' type='radio' value='K'/></label>
+                <label>해외<input name='nation' type='radio' value='F'/></label>
+            </form>
+            <div id=calander class=calander>
+                <button id="yesterdayBtn"><</button>
+                <div id=date></div>
+                <button id="tomorrowBtn" disabled="disabled">></button>
+            </div>
+            <div id="movieRank" class="movieRank"></div>
+        </div>
+        
+    </body>
+    <div class="modal-container" id="modal">
+        <div class="modal">
+            <button class="close" id="close">X</button>
+            <div class="modal-content" id="content"></div>
+        </div>
+    </div>
+    <script src=test.js></script>
+</html>
