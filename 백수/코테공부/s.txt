@@ -1,0 +1,148 @@
+from collections import deque
+T = int(input())
+dr = [-1,1,0,0]
+dc = [0,0,-1,1]
+ans = []
+for t in range(T):
+  m,n = map(int,input().split())
+  grid = [list(map(int,input().split())) for i in range(m)]
+  visited = [[False for i in range(n)] for j in range(m)]
+  hasKey = False
+  def bfs(row,col):
+    q = deque()
+    q.append([row,col])
+    hasKey = False
+    hasBox = False
+    while q:
+      r,c = q.popleft()
+      visited[r][c] = True
+
+      for i in range(4):
+        nr = r+dr[i]
+        nc = c+dc[i]
+        if 0<=nr<m and 0<=nc<n and not visited[nr][nc]:
+          if grid[nr][nc] == 0:
+            q.append([nr,nc])
+          elif grid[nr][nc] == 2:
+            hasBox = True
+            q.append([nr,nc])
+          elif grid[nr][nc] == 4:
+            hasKey = True
+            q.append([nr,nc])
+
+    if hasKey and hasBox:
+      return 1
+    else:
+      return 0
+  
+  for i in range(m):
+    for j in range(n):
+      if grid[i][j] == 3:
+        ans.append(bfs(i,j))
+      
+for a in ans:
+  print(a)
+    
+    
+
+
+
+
+'''
+2
+5 6
+0 0 1 0 2 0
+1 0 1 0 0 0
+0 0 1 1 1 0
+0 3 0 1 0 0
+4 0 0 0 0 0
+5 6
+0 0 1 0 2 0
+1 0 1 0 0 0
+0 0 1 1 1 0
+0 3 0 1 0 0
+4 0 0 1 0 0
+'''
+
+
+
+
+=======================
+
+
+
+
+
+
+=======================
+n = int(input())
+li = list(map(int,input().split()))
+dic = {}
+ans = 0
+def find(start):
+  if start not in dic:
+    dic[start] = [start]
+  ret = 0
+  while True:
+    idx = dic[start][-1] + li[dic[start][-1]]
+    if 0<=idx<n:
+      if idx in dic[start]:
+        ret = len(dic[start]) - dic[start].index(idx)
+        break
+      else:
+        dic[start].append(idx)
+    else:
+      ret = 0
+      break
+
+  for i,num in enumerate(dic[start]):
+    if num not in dic:
+      dic[num] = dic[start][i:]
+
+  return ret
+
+for i in range(n):
+  if i in dic:
+    continue
+  ans = max(ans,find(i))
+
+for i in dic:
+  print(i,dic[i])
+print(ans)
+'''
+10
+3 5 -1 -2 4 4 3 -2 -3 -2
+
+15
+3 5 -1 -2 4 4 3 -2 -3 -2 1 1 1 1 -4
+'''
+
+===========================
+n = int(input())
+li = list(map(int,input().split()))
+dic = {}
+ans = 0
+def find(start):
+  if start not in dic:
+    dic[start] = [start]
+
+  while True:
+    idx = dic[start][-1] + li[dic[start][-1]]
+    if 0<=idx<n:
+      if idx in dic[start]:
+        return len(dic[start]) - dic[start].index(idx)
+      else:
+        dic[start].append(idx)
+    else:
+      return 0
+
+for i in range(n):
+  ans = max(ans,find(i))
+print(ans)
+'''
+10
+3 5 -1 -2 4 4 3 -2 -3 -2
+
+15
+3 5 -1 -2 4 4 3 -2 -3 -2 1 1 1 1 -4
+'''
