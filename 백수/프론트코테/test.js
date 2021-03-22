@@ -8,6 +8,7 @@ const modal = document.getElementById('modal');
 const modalClose = document.getElementById('close');
 const modalContent = document.getElementById('content');
 const radioBtn = document.getElementsByName('nation');
+const darkMode = document.getElementsByName('darkModeSwitch')[0];
 
 const body = document.body;
 let now = new Date();
@@ -60,6 +61,37 @@ const closeModal = () => {
     modal.classList.remove('show-modal');
     modalContent.innerHTML = '';
 }
+
+function DarkMode(){
+    var mainLogo = document.getElementById('mainLogo');
+    var chkbox = document.getElementsByName('darkModeSwitch')[0];
+    var div  = document.getElementsByTagName('div');
+    var button = document.getElementsByTagName('button');
+    //console.log(chkbox);
+    //console.log(mainLogo);
+    if(chkbox.checked){
+        //chkbox.checked = false;
+        mainLogo.style.backgroundColor='blue';
+        for(var i =0; i<div.length;i++){
+            div[i].style.color = 'blue';
+        }
+        for(var i =0; i<button.length;i++){
+            button[i].style.backgroundColor = 'blue';
+            button[i].style.color = 'black';
+        }
+    }else{
+        //chkbox.checked = true;
+        mainLogo.style.backgroundColor='black';
+        for(var i =0; i<div.length;i++){
+            div[i].style.color = 'black';
+        }
+        for(var i =0; i<button.length;i++){
+            button[i].style.backgroundColor = 'black';
+            button[i].style.color = 'blue';
+        }
+    }
+}
+
 radioBtn.forEach((nation)=>{
     nation.addEventListener("click",(e)=>{
         const nation = getNation();
@@ -156,3 +188,5 @@ ajax(main_url+getDate(now))
 .then((res)=>{
     movieRankRender(res);
 })
+
+darkMode.addEventListener("click",DarkMode);
