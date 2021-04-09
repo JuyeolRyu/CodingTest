@@ -1,5 +1,4 @@
-#https://www.acmicpc.net/problem/12100
-#2048
+#https://www.acmicpc.net/problem/16236
 import sys,copy
 from collections import deque
 #입력부
