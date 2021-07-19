@@ -1,5 +1,5 @@
-#팰린드롬 분할
-#https://www.acmicpc.net/problem/1509\
+#미친 로봇
+#https://www.acmicpc.net/problem/1405
 
 #sol1(dp)
 import sys
