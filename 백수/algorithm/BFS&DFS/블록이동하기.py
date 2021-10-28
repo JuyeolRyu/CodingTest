@@ -1,59 +1,53 @@
-import sys
 from collections import deque
-from copy import deepcopy
-MAX = sys.maxsize
-sys.setrecursionlimit(10**6)
+
 def solution(board):
     answer = 0
-    move=[[-1,0,-1,0],[1,0,1,0],[0,-1,0,-1],[0,1,0,1],[1,1,0,0],[-1,1,0,0],[1,-1,0,0],[-1,-1,0,0],[0,0,-1,-1],[0,0,1,-1],[0,0,-1,1],[0,0,1,1]]
-    visited=[]
+    n=len(board)
+    visited=set()
+    visited.add(((1,1),(1,2)))
     q=deque()
-    q.append([[0,0],[0,1],0])
-    n = len(board)
+    q.append([(1,1),(1,2),0])
     
-    def is_valid(cur_pointA,ne_pointA,pointB):
-        point=[]
-        if abs(pointB[0]-ne_pointA[0])+abs(pointB[1]-ne_pointA[1])>1:
-            return False
-        for nums in zip(*[cur_pointA,ne_pointA,pointB]):
-            for num in nums:
-                if nums.count(num)==1:
-                    point.append(num)
-                    break
-        #print(point,n)
-        if 0>point[0] or point[0]>=n or 0>point[1] or point[1]>=n or board[point[0]][point[1]]==1:
-            return False
-        #print('hello')
-        return True
+    new_board=[[1]*(n+2) for _ in range(n+2)]
+    for r in range(n):
+        for c in range(n):
+            new_board[r+1][c+1]=board[r][c]
+    
 
+    def can_move(cur1, cur2):
+        Y, X = 0, 1
+        cand = []
+        
+        DELTAS = [(-1, 0), (1, 0), (0, 1), (0, -1)]
+        for dy, dx in DELTAS:
+            nxt1 = (cur1[Y] + dy, cur1[X] + dx)
+            nxt2 = (cur2[Y] + dy, cur2[X] + dx)
+            if new_board[nxt1[Y]][nxt1[X]] == 0 and new_board[nxt2[Y]][nxt2[X]] == 0:
+                cand.append((nxt1, nxt2))
+
+        if cur1[Y] == cur2[Y]:
+            UP, DOWN = -1, 1
+            for d in [UP, DOWN]:
+                if new_board[cur1[Y]+d][cur1[X]] == 0 and new_board[cur2[Y]+d][cur2[X]] == 0:
+                    cand.append((cur1, (cur1[Y]+d, cur1[X])))
+                    cand.append((cur2, (cur2[Y]+d, cur2[X])))
+        else:
+            LEFT, RIGHT = -1, 1
+            for d in [LEFT, RIGHT]:
+                if new_board[cur1[Y]][cur1[X]+d] == 0 and new_board[cur2[Y]][cur2[X]+d] == 0:
+                    cand.append(((cur1[Y], cur1[X]+d), cur1))
+                    cand.append(((cur2[Y], cur2[X]+d), cur2))
+        return cand
     
     while q:
         a,b,cnt=q.popleft()
-        
-        if a == [n-1,n-1] or b == [n-1,n-1]:
+        if a == (n,n) or b == (n,n):
             return cnt
-        visited.append(a+b)
-        
-        for i in range(4):
-            nar,nac=a[0]+move[i][0],a[1]+move[i][1]
-            nbr,nbc=b[0]+move[i][2],b[1]+move[i][3]
-            
-            if 0<=nar<n and 0<=nac<n and 0<=nbr<n and 0<=nbc<n and [nar,nac,nbr,nbc] not in visited and board[nar][nac]==0 and board[nbr][nbc]==0:
-                q.append([[nar,nac],[nbr,nbc],cnt+1])
-                
-        for i in range(4,8):
-            nar,nac=a[0]+move[i][0],a[1]+move[i][1]
-            nbr,nbc=b[0]+move[i][2],b[1]+move[i][3]
-            
-            if 0<=nar<n and 0<=nac<n and 0<=nbr<n and 0<=nbc<n and [nar,nac,nbr,nbc] not in visited and is_valid(a,[nar,nac],[nbr,nbc]) and board[nar][nac]==0 and board[nbr][nbc]==0:
-                q.append([[nar,nac],[nbr,nbc],cnt+1])
-                
-        for i in range(8,12):
-            nar,nac=a[0]+move[i][0],a[1]+move[i][1]
-            nbr,nbc=b[0]+move[i][2],b[1]+move[i][3]
-            
-            if 0<=nar<n and 0<=nac<n and 0<=nbr<n and 0<=nbc<n and [nar,nac,nbr,nbc] not in visited and is_valid(b,[nbr,nbc],[nar,nac]) and board[nar][nac]==0 and board[nbr][nbc]==0:
-                q.append([[nar,nac],[nbr,nbc],cnt+1])
+
+        for ne in can_move(a,b):
+            if ne not in visited:
+                q.append([*ne,cnt+1])
+                visited.add(ne)
                 
 
     return answer
